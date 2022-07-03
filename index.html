@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Excercise 9 | Rosillo </title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+<section class="container py-5">
+    <div class="w-100" style="color: white;"> 
+        <h1> The Rock Paper Scissor Game </h1>
+    </div>
+    <div class="container row cont" style="background-color: gray;" >
+        <div class="container scores col-md-6">
+            <table class="table">
+               <tr class="text-center">
+                   <td>Computer Choice</td>
+                   <td>Result</td>
+                   <td>Your Choice</td>
+               </tr>
+               <tr style="height: 10vh;">
+                   <td><h2><span id="computerch"> </span></h2></td>
+                   <td><h2><span id="result"> </span></h2></td>
+                   <td><h2><span id="userch"> </span></h2></td>
+               </tr>
+            </table>
+           </div>
+        <div class="buttons col-md-6 ">
+        <button class="btn" id="rock"> 👊 </button>
+        <button class="btn" id="paper"> 🤚 </button>
+        <button class="btn" id="scissors"> ✌ </button>
+        </div> 
+        
+        <div class="container scores col-md-6 ">
+            <table class="table">
+               <tr>
+                   <td colspan="2">Game Score</td>
+               </tr>
+               <tr class="text-center">
+                   <td>Computer Score: </td>
+                   <td>Your Score: </td>
+               </tr>
+               <tr class="text-center" style="height: 10vh;">
+                   <td><h2> <span id="comscore"> </span></h2></td>
+                   <td><h2><span id="userscore"> </span></h2></td>
+               </tr>
+            </table>
+           </div>
+        <div class="buttons col-md-6">
+            <div class="align-items-start">
+                <br>
+                <h2 style=" color: black;"> History: </h2>
+                <ul id="history" style="text-decoration: none; color:white;"></ul><br>
+            </div>
+        </div> 
+    </div>
+</section>
+
+
+<script>
+    const computerch =  document.getElementById('computerch')
+    const userch = document.getElementById('userch')
+    const resultd = document.getElementById('result')
+    const usersc = document.getElementById('userscore')
+    const comsc = document.getElementById('comscore')
+    const possiblech = document.querySelectorAll('button')
+    let list = document.getElementById('history');
+    let li = document.createElement("li");
+    let comscore = 0;
+    let userscore = 0;
+    let userchoice
+    let computerchoice
+    let result
+   
+    possiblech.forEach( possiblech => possiblech.addEventListener('click', (a) => {
+     userchoice = a.target.id
+     userch.innerHTML = userchoice
+     gencomputerch()
+     getResult()
+   
+    }))
+   
+    function gencomputerch() {
+     const random = Math.floor(Math.random() * 3) + 1;// or you can use possibleChoices.length
+     
+     if (random === 1) {
+       computerchoice = 'rock';
+     }
+     if (random === 2) {
+       computerchoice = 'scissors';
+     }
+     if (random === 3) {
+       computerchoice = 'paper';
+     }
+     computerch.innerHTML = computerchoice;
+   }
+   
+   function getResult() {
+     let list = document.getElementById('history');
+     let li = document.createElement("li");
+   
+     if (computerchoice === 'rock' && userchoice === 'rock') {
+       result = 'its a draw!';
+       li.innerHTML = "rock vs rock";
+       list.appendChild(li);
+     }
+     else if (computerchoice === 'paper' && userchoice === 'paper') {
+       result = 'its a draw!';
+       li.innerHTML = "paper vs paper";
+       list.appendChild(li);
+     }
+     else if (computerchoice === 'scissors' && userchoice === 'scissors') {
+       result = 'its a draw!';
+       li.innerHTML = "scissors vs scissors";
+       list.appendChild(li);
+     }
+     else if (computerchoice === 'rock' && userchoice === "paper") {
+       result = 'you win!';
+       userscore += 1;
+       li.innerHTML = "rock vs paper";
+       li.style.color = 'lightblue';
+       list.appendChild(li);
+     }
+     else if (computerchoice === 'rock' && userchoice === "scissors") {
+       result = 'you lost!';
+       comscore += 1;
+       li.innerHTML = "rock vs scissor";
+       li.style.color = 'black';
+       list.appendChild(li);
+     }
+     else if (computerchoice === 'paper' && userchoice === "scissors") {
+       result = 'you win!';
+       userscore += 1;
+       li.innerHTML = "paper vs scissors";
+       li.style.color = 'lightblue';
+       list.appendChild(li);
+     }
+     else if (computerchoice === 'paper' && userchoice === "rock") {
+       result = 'you lose!';
+       comscore += 1;
+       li.innerHTML = "paper vs rock";
+       li.style.color = 'black';
+       list.appendChild(li);
+     }
+     else if (computerchoice === 'scissors' && userchoice === "rock") {
+       result = 'you win!';
+       userscore += 1;
+       li.innerHTML = "scissors vs rock";
+       li.style.color = 'lightblue';
+       list.appendChild(li);
+     }
+     else if (computerchoice === 'scissors' && userchoice === "paper") {
+       result = 'you lose!';
+       comscore += 1;
+       li.innerHTML = "scissors vs paper";
+       li.style.color = 'black';
+       list.appendChild(li);
+   }
+     
+     resultd.innerHTML = result;
+     usersc.innerHTML = userscore;
+     comsc.innerHTML = comscore;
+   }
+</script>
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" 
+integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</body>
+</html>
