@@ -13,12 +13,12 @@ body{
 .btn{ 
        color: red;
        background-color: black;
-       width: 100%;
+       width: 25%;
        height: 20vh;
-       font-size: 50px;
+       font-size: 100%;
        margin: 10px;
-
 }
+
 .btn:hover{
     background: linear-gradient(35deg, rgba(190, 162, 1, 0.836),rgba(128, 0, 128, 0.596));
 }
@@ -33,4 +33,10 @@ span{
 }
 table{
     border-color: black ;
+}
+
+@media only screen and (min-width:768px){
+    .btn{
+        font-size: 25%;
+    }
 }
